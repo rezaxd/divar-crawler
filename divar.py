@@ -21,12 +21,12 @@ for i in range(startPage, 100):
         break
 
     contentAsBS = BS(reqToGetTokens.text, 'html.parser')
-    post_cards = contentAsBS.select(".post-card")
+    post_cards = contentAsBS.select(".post-card-item .kt-post-card")
 
     print("#### Page %d"%i)
 
     for j in range(len(post_cards)):
-        reqToGetPhone = req.get("https://api.divar.ir/v5/posts/%s/contact/"%post_cards[j]['href'].split("/")[-1])
+        reqToGetPhone = req.get("https://api.divar.ir/v5/posts/%s/"%post_cards[j]['href'].split("/")[-1])
         if reqToGetPhone.ok == False:
             lastPage = "Error at page %d item %d"%(i, j + 1)
             break
